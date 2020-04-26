@@ -32,7 +32,7 @@ public class GenreController implements IGenreController {
 		try {
 			listOfGenre = genreService.getAPI_Genre(movie_id);
 		} catch (Exception e) {
-			LOGGER.error("Unexpected Error: getAPI_Genre: " + e);
+			LOGGER.error("Unexpected Error From Controller: getAPI_Genre: " + e);
 		}
 
 		return listOfGenre;
