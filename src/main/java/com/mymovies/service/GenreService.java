@@ -25,6 +25,9 @@ public class GenreService implements IGenreService {
 	
 	@Value("${resource.api.language}")
 	private String Language;
+	
+	@Value("${service.url}")
+	private String serviceUrl;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GenreService.class);
 	
@@ -35,8 +38,12 @@ public class GenreService implements IGenreService {
 
 		MovieDTO movie = null;
 		
+		String url = serviceUrl == "" ? BASE_URL+movie_id+API_KEY+Language : serviceUrl+movie_id;
+		
+		LOGGER.info("@Get getAPI_Genre Service URL : " + url);
+		
 		try {
-			movie = restTemplate.getForObject(BASE_URL+movie_id+API_KEY+Language, MovieDTO.class);
+			movie = restTemplate.getForObject(url, MovieDTO.class);
 		} catch (Exception e) {
 			LOGGER.error("Unexpected Error From Service: getAPI_Genre: " + e);
 		}
